@@ -124,7 +124,9 @@ class MultipleGameSets:
         self._n_games_in_a_set = n_games_in_a_set  # number of games in each set
 
         self._totalRewards = [] # create an empty list where rewards will be stored
+        self._meanRewards = []
         self._sumStat_totalRewards = None
+        self._sumStat_meanRewards =None
 
     def simulation(self):
         for i in self._ids:
@@ -134,20 +136,20 @@ class MultipleGameSets:
             outcomes = set_of_games.simulation()
             # store the total reward from this game set
             self._totalRewards.append(outcomes.get_total_reward())
-
+            self._meanRewards.append(outcomes.get_ave_reward())
         # summary statistics of total rewards
-        self._sumStat_totalRewards = Stat.SummaryStat("Mean Rewards", self._totalRewards)
-
-    def get_all_rewards(self):
-        return self._totalRewards
+        self._sumStat_totalRewards = Stat.SummaryStat("Total Rewards", self._totalRewards)
+        self._sumStat_meanRewards= Stat.SummaryStat('Mean Rewards', self._meanRewards)
+    def get_mean_rewards(self):
+        return self._meanRewards
 
     # get the mean of total rewards
     def get_mean_total_reward(self):
-        return self._sumStat_totalRewards.get_mean()
+        return self._sumStat_meanRewards.get_mean()
 
     # get prediction interval for total reward
     def get_PI_total_reward(self, alpha):
-        return self._sumStat_totalRewards.get_PI(alpha)
+        return self._sumStat_meanRewards.get_PI(alpha)
 
     # get all total rewards
     def get_all_total_rewards(self):

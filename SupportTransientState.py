@@ -34,8 +34,8 @@ def print_comparative_outcomes(multi_cohort_no_drug, multi_cohort_with_drug):
     # increase in survival time
     increase = Stat.DifferenceStatIndp(
         name='Increase in mean survival time',
-        x=multi_cohort_with_drug.get_all_rewards(),
-        y_ref=multi_cohort_no_drug.get_all_rewards()
+        x=multi_cohort_with_drug.get_mean_rewards(),
+        y_ref=multi_cohort_no_drug.get_mean_rewards()
     )
     # estimate and CI
     estimate_CI = Format.format_estimate_interval(
