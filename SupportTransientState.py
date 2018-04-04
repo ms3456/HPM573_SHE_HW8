@@ -40,7 +40,7 @@ def print_comparative_outcomes(multi_cohort_no_drug, multi_cohort_with_drug):
     # estimate and CI
     estimate_CI = Format.format_estimate_interval(
         estimate=increase.get_mean(),
-        interval=increase.get_t_CI(alpha=P.ALPHA),
+        interval=increase.get_PI(alpha=P.ALPHA),
         deci=1
     )
     print("Expected increase in reward (dollars) and {:.{prec}%} prediction interval:".format(1 - P.ALPHA, prec=0),
